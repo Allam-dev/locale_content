@@ -13,7 +13,6 @@ class DetailsScreen extends StatefulWidget {
 class _DetailsScreenState extends State<DetailsScreen> {
   late VideoPlayerController _controller;
 
-
   @override
   void initState() {
     super.initState();
@@ -25,7 +24,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return RotatedBox(
+      quarterTurns: -1,
       child: Scaffold(
         body: _controller.value.isInitialized
             ? Stack(
@@ -41,13 +41,17 @@ class _DetailsScreenState extends State<DetailsScreen> {
                     ),
                   ),
                   Positioned(
-                    bottom: context.ofSH(0.075),
-                    left: context.ofSW(0.06) ,
+                    top: context.ofSH(0.4),
+                    bottom: context.ofSH(0.0006),
+                    right: context.ofSW(1.09),
+                    left: context.ofSW(0.8995),
                     child: InkWell(
                       onTap: () {
                         Navigator.pop(context);
                       },
-                      child: Image.asset(Assets.backButton,width: context.ofSW(0.37),),
+                      child: Image.asset(Assets.backButton,
+                          width: MediaQuery.sizeOf(context).width * 0.01,
+                          height: MediaQuery.sizeOf(context).height * 0.01),
                     ),
                   ),
                 ],

@@ -6,7 +6,6 @@ import 'package:video_player/video_player.dart';
 import '../core/assets.dart';
 import 'details.dart';
 
-
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -29,46 +28,50 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return RotatedBox(
+      quarterTurns: -1,
       child: LayoutBuilder(builder: (context, constraints) {
         return Scaffold(
           body: _controller.value.isInitialized
               ? Stack(
-            children: [
-              Center(
-                child: FittedBox(
-                  fit: BoxFit.cover,
-                  child: SizedBox(
-                    width: _controller.value.size.width,
-                    height: _controller.value.size.height,
-                    child: VideoPlayer(_controller),
-                  ),
-                ),
-              ),
-              Positioned(
-                top: context.ofSH(0.445),
-                right: 0,
-                left: 0,
-                child: InkWell(
-                  onTap: () {
-                    Navigator.of(context)
-                        .push(MaterialPageRoute(
-                        builder: (context) => const DetailsScreen()))
-                        .then((value) => _controller.play());
-                  },
-                  child: Image.asset(Assets.homeButton,height: context.ofSH(0.1),),
-                ),
-              ),
-               Positioned(
-                top: context.ofSH(0.5),
-                right: 0,
-                left: 0,
-                child: ClickGif(
-                  height: context.ofSH(0.1),
-                ),
-              ),
-            ],
-          )
+                  children: [
+                    Center(
+                      child: FittedBox(
+                        fit: BoxFit.cover,
+                        child: SizedBox(
+                          width: _controller.value.size.width,
+                          height: _controller.value.size.height,
+                          child: VideoPlayer(_controller),
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      top: context.ofSH(0.22),
+                      right: 0,
+                      left: 0,
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.of(context)
+                              .push(MaterialPageRoute(
+                                  builder: (context) => const DetailsScreen()))
+                              .then((value) => _controller.play());
+                        },
+                        child: Image.asset(
+                          Assets.homeButton,
+                          height: context.ofSH(.05),
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      top: context.ofSH(0.5),
+                      right: 0,
+                      left: 0,
+                      child: ClickGif(
+                        height: context.ofSH(0.1),
+                      ),
+                    ),
+                  ],
+                )
               : const SizedBox.shrink(),
         );
       }),
